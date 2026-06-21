@@ -103,6 +103,11 @@ pub fn simulate(
     fn(attempt, _now_ms) { scenario_outcome(scenario, attempt) },
   )
   let timeline = build_timeline(scenario, execution)
+  let finished_at_ms = if timeline.length() == 0 {
+    execution.finished_at_ms
+  } else {
+    timeline[timeline.length() - 1].at_ms
+  }
   let events = trace_to_event_log(
     execution.trace,
     scenario.operation,
@@ -111,14 +116,14 @@ pub fn simulate(
   let mut metric_state = metrics_from_log(events)
   metric_state = metrics_observe_latency(
     metric_state,
-    execution_duration_ms(execution),
+    max_int(0, finished_at_ms - scenario.started_at_ms),
   )
   {
     scenario,
     outcome: execution.outcome,
     chain: execution.chain,
     attempts: execution.attempts,
-    finished_at_ms: execution.finished_at_ms,
+    finished_at_ms,
     timeline,
     events,
     metrics: metrics_snapshot(metric_state),

@@ -1,0 +1,7 @@
+import {
+  "q2weasd/moonresilience",
+}
+
+options(
+  "is-main": true,
+)
