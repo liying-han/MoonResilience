@@ -50,7 +50,7 @@ SECTIONS = [
     ),
     (
         "04  当前成果与验证方式",
-        "仓库已完成核心库、CLI 示例、配置样例、API 与架构文档，现有约 4.5k 行有效 MoonBit 代码和 100 项测试。测试覆盖退避边界、熔断状态转换、两类限流器、Bulkhead 容量耗尽、策略顺序、配置错误、时间模拟、指标导出及批量场景。评审者可直接运行 moon check、moon test 和 moon run cmd/main；README 同时列出同步执行、显式时钟等当前边界。",
+        "仓库已完成核心库、CLI 示例、配置样例、API 与架构文档，现有约 5.0k 行有效 MoonBit 代码和 100 项测试。测试覆盖退避边界、熔断状态转换、两类限流器、Bulkhead 容量耗尽、策略顺序、配置错误、时间模拟、指标导出及批量场景。评审者可直接运行 moon check、moon test 和 moon run cmd/main；README 同时列出同步执行、显式时钟等当前边界。",
     ),
     (
         "05  公开开发与后续计划",
@@ -70,12 +70,14 @@ def register_pdf_fonts():
 
 def build_pdf():
     register_pdf_fonts()
-    navy = colors.HexColor("#183153")
-    blue = colors.HexColor("#2867A8")
-    pale = colors.HexColor("#EDF3F9")
-    rule = colors.HexColor("#B9C8D8")
-    ink = colors.HexColor("#17212B")
-    muted = colors.HexColor("#526170")
+    forest = colors.HexColor("#214E3B")
+    green = colors.HexColor("#2F6B57")
+    gold = colors.HexColor("#A77A35")
+    pale = colors.HexColor("#EAF2ED")
+    warm_pale = colors.HexColor("#F5F0E7")
+    rule = colors.HexColor("#AFC2B8")
+    ink = colors.HexColor("#202A26")
+    muted = colors.HexColor("#5C6963")
 
     doc = SimpleDocTemplate(
         str(PDF_PATH),
@@ -89,25 +91,25 @@ def build_pdf():
     )
     styles = {
         "kicker": ParagraphStyle(
-            "Kicker", fontName="YaHei", fontSize=8.2, leading=10, textColor=blue,
-            alignment=TA_CENTER, spaceAfter=2,
+            "Kicker", fontName="YaHeiBold", fontSize=8.2, leading=10, textColor=gold,
+            alignment=TA_LEFT, spaceAfter=2,
         ),
         "title": ParagraphStyle(
-            "Title", fontName="YaHeiBold", fontSize=21, leading=25, textColor=navy,
-            alignment=TA_CENTER, spaceAfter=2,
+            "Title", fontName="YaHeiBold", fontSize=20.5, leading=24, textColor=forest,
+            alignment=TA_LEFT, spaceAfter=2,
         ),
         "subtitle": ParagraphStyle(
-            "Subtitle", fontName="YaHei", fontSize=10, leading=13, textColor=muted,
-            alignment=TA_CENTER, spaceAfter=7,
+            "Subtitle", fontName="YaHei", fontSize=9.8, leading=13, textColor=muted,
+            alignment=TA_LEFT, spaceAfter=7,
         ),
         "label": ParagraphStyle(
-            "Label", fontName="YaHeiBold", fontSize=8.2, leading=10.2, textColor=navy,
+            "Label", fontName="YaHeiBold", fontSize=8.2, leading=10.2, textColor=forest,
         ),
         "meta": ParagraphStyle(
             "Meta", fontName="YaHei", fontSize=8.0, leading=10.0, textColor=ink,
         ),
         "heading": ParagraphStyle(
-            "Heading", fontName="YaHeiBold", fontSize=9.6, leading=12, textColor=navy,
+            "Heading", fontName="YaHeiBold", fontSize=9.6, leading=12, textColor=forest,
             spaceBefore=0, spaceAfter=2.2,
         ),
         "body": ParagraphStyle(
@@ -124,7 +126,18 @@ def build_pdf():
         ),
     }
 
+    masthead_rule = Table([["", ""]], colWidths=[138 * mm, 42 * mm], rowHeights=[2.2 * mm])
+    masthead_rule.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (0, 0), green),
+        ("BACKGROUND", (1, 0), (1, 0), gold),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ]))
     story = [
+        masthead_rule,
+        Spacer(1, 5),
         Paragraph("2026 MoonBit 国产基础软件开源大赛", styles["kicker"]),
         Paragraph(TITLE, styles["title"]),
         Paragraph(SUBTITLE + " · 项目标识 moonresilience", styles["subtitle"]),
@@ -133,11 +146,11 @@ def build_pdf():
     for label, value in META:
         shown = value
         if label in ("GitLink 仓库", "GitHub 仓库"):
-            shown = "<link href='" + value + "' color='#2867A8'>" + value + "</link>"
+            shown = "<link href='" + value + "' color='#2F6B57'>" + value + "</link>"
         meta_rows.append([Paragraph(label, styles["label"]), Paragraph(shown, styles["meta"])])
     table = Table(meta_rows, colWidths=[31 * mm, 149 * mm], hAlign="CENTER")
     table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (0, -1), pale),
+        ("BACKGROUND", (0, 0), (0, -1), warm_pale),
         ("BOX", (0, 0), (-1, -1), 0.55, rule),
         ("INNERGRID", (0, 0), (-1, -1), 0.35, rule),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -154,7 +167,7 @@ def build_pdf():
         )
         block.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (0, 0), pale),
-            ("LINEBEFORE", (0, 0), (0, -1), 2.1, blue),
+            ("LINEBEFORE", (0, 0), (0, -1), 2.1, green),
             ("LEFTPADDING", (0, 0), (-1, -1), 6),
             ("RIGHTPADDING", (0, 0), (-1, -1), 5),
             ("TOPPADDING", (0, 0), (-1, 0), 3.1),
@@ -168,7 +181,7 @@ def build_pdf():
     metric_cells = [
         ("4 类", "基础策略"),
         ("2 种", "限流算法"),
-        ("约 4.5k 行", "有效 MoonBit 代码"),
+        ("约 5.0k 行", "有效 MoonBit 代码"),
         ("100 项", "自动化测试"),
     ]
     metric_table = Table(
@@ -177,7 +190,7 @@ def build_pdf():
                 "<b>" + value + "</b><br/><font size='7.2'>" + label + "</font>",
                 ParagraphStyle(
                     "Metric", fontName="YaHei", fontSize=9.1, leading=11.5,
-                    textColor=navy, alignment=TA_CENTER,
+                    textColor=forest, alignment=TA_CENTER,
                 ),
             )
             for value, label in metric_cells
@@ -185,7 +198,7 @@ def build_pdf():
         colWidths=[45 * mm] * 4,
     )
     metric_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), pale),
+        ("BACKGROUND", (0, 0), (-1, -1), warm_pale),
         ("BOX", (0, 0), (-1, -1), 0.5, rule),
         ("INNERGRID", (0, 0), (-1, -1), 0.35, rule),
         ("TOPPADDING", (0, 0), (-1, -1), 5),
@@ -201,7 +214,7 @@ def build_pdf():
              [Paragraph("当前边界：核心库不直接发起网络请求；生产接入层负责提供实际时钟与异步调度。", styles["note"])]],
             colWidths=[180 * mm],
             style=TableStyle([
-                ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#F5F7FA")),
+                ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#F1F5F2")),
                 ("LINEBEFORE", (0, 0), (0, -1), 1.5, rule),
                 ("LEFTPADDING", (0, 0), (-1, -1), 6),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 5),
@@ -274,15 +287,15 @@ def build_docx():
     normal.paragraph_format.line_spacing = 1.18
 
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(1)
-    set_run_font(p.add_run("2026 MoonBit 国产基础软件开源大赛"), 8.2, color="2867A8")
+    set_run_font(p.add_run("2026 MoonBit 国产基础软件开源大赛"), 8.2, color="A77A35")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(0)
-    set_run_font(p.add_run(TITLE), 20, bold=True, color="183153")
+    set_run_font(p.add_run(TITLE), 20, bold=True, color="214E3B")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(5)
     set_run_font(p.add_run(SUBTITLE + " · 项目标识 moonresilience"), 9.5, color="526170")
 
@@ -296,10 +309,10 @@ def build_docx():
         for cell in row.cells:
             cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
             set_cell_margins(cell)
-        set_cell_shading(row.cells[0], "EDF3F9")
+        set_cell_shading(row.cells[0], "F5F0E7")
         left = row.cells[0].paragraphs[0]
         right = row.cells[1].paragraphs[0]
-        set_run_font(left.add_run(label), 8.0, bold=True, color="183153")
+        set_run_font(left.add_run(label), 8.0, bold=True, color="214E3B")
         set_run_font(right.add_run(value), 7.8)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(0)
@@ -308,7 +321,7 @@ def build_docx():
         p.paragraph_format.space_before = Pt(2.5)
         p.paragraph_format.space_after = Pt(1.5)
         p.paragraph_format.keep_with_next = True
-        set_run_font(p.add_run(heading), 9.4, bold=True, color="183153")
+        set_run_font(p.add_run(heading), 9.4, bold=True, color="214E3B")
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.space_after = Pt(2.5)
@@ -319,16 +332,16 @@ def build_docx():
     metric_cells = [
         ("4 类", "基础策略"),
         ("2 种", "限流算法"),
-        ("约 4.5k 行", "有效 MoonBit 代码"),
+        ("约 5.0k 行", "有效 MoonBit 代码"),
         ("100 项", "自动化测试"),
     ]
     for cell, (value, label) in zip(metrics.rows[0].cells, metric_cells):
-        set_cell_shading(cell, "EDF3F9")
+        set_cell_shading(cell, "F5F0E7")
         set_cell_margins(cell, top=70, bottom=70)
         cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
         paragraph = cell.paragraphs[0]
         paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        set_run_font(paragraph.add_run(value + "\n"), 9.0, bold=True, color="183153")
+        set_run_font(paragraph.add_run(value + "\n"), 9.0, bold=True, color="214E3B")
         set_run_font(paragraph.add_run(label), 7.2, color="526170")
 
     p = doc.add_paragraph()
