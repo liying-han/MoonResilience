@@ -4,7 +4,7 @@ pub(all) enum BackoffStrategy {
   Exponential(Int, Int)
   Linear(Int, Int, Int)
   Sequence(Array[Int])
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub(all) struct RetryPolicy {
@@ -12,7 +12,7 @@ pub(all) struct RetryPolicy {
   max_elapsed_ms : Int
   backoff : BackoffStrategy
   retryable_codes : Array[String]
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub(all) struct RetrySnapshot {
@@ -21,7 +21,7 @@ pub(all) struct RetrySnapshot {
   next_delay_ms : Int
   can_retry : Bool
   stop_reason : String
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub fn fixed_backoff(delay_ms : Int) -> BackoffStrategy {
