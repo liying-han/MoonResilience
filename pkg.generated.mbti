@@ -1,0 +1,675 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "q2weasd/moonresilience"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn batch_failures(BatchResult) -> Array[BatchItemResult]
+
+pub fn batch_find(BatchResult, String) -> SimulationResult?
+
+pub fn batch_request(String, SimulationScenario) -> BatchRequest
+
+pub fn batch_summary(BatchResult) -> BatchSummary
+
+pub fn breaker_before_call(CircuitBreaker, Int) -> BreakerDecision
+
+pub fn breaker_cancel_call(CircuitBreaker) -> CircuitBreaker
+
+pub fn breaker_force_close(CircuitBreaker) -> CircuitBreaker
+
+pub fn breaker_force_open(CircuitBreaker, Int) -> CircuitBreaker
+
+pub fn breaker_record_failure(CircuitBreaker, Int) -> CircuitBreaker
+
+pub fn breaker_record_success(CircuitBreaker, Int) -> CircuitBreaker
+
+pub fn breaker_snapshot(CircuitBreaker, Int) -> BreakerSnapshot
+
+pub fn breaker_state_name(BreakerState) -> String
+
+pub fn bulkhead_admit(Bulkhead, String, Int) -> BulkheadAdmission
+
+pub fn bulkhead_cancel_waiting(Bulkhead, String) -> Bulkhead
+
+pub fn bulkhead_complete(Bulkhead, String) -> BulkheadRelease
+
+pub fn bulkhead_config(Int, Int) -> BulkheadConfig
+
+pub fn bulkhead_contains(Bulkhead, String) -> Bool
+
+pub fn bulkhead_snapshot(Bulkhead) -> BulkheadSnapshot
+
+pub fn bulkhead_wait_ms(Bulkhead, String, Int) -> Int?
+
+pub fn check_policy_invariants(PolicyChain) -> Array[InvariantViolation]
+
+pub fn circuit_breaker_config(Int, Int, Int, Int) -> CircuitBreakerConfig
+
+pub fn clock_advance(VirtualClock, Int) -> VirtualClock
+
+pub fn clock_advance_to(VirtualClock, Int) -> VirtualClock
+
+pub fn config_to_policy_chain(ResilienceConfig, Int) -> Result[PolicyChain, ConfigError]
+
+pub fn context_with_tag(ExecutionContext, String, String) -> ExecutionContext
+
+pub fn default_bulkhead() -> Bulkhead
+
+pub fn default_circuit_breaker() -> CircuitBreaker
+
+pub fn default_config() -> ResilienceConfig
+
+pub fn default_latency_histogram() -> LatencyHistogram
+
+pub fn default_policy_chain(Int) -> PolicyChain
+
+pub fn default_retry_policy() -> RetryPolicy
+
+pub fn empty_execution_trace() -> ExecutionTrace
+
+pub fn event_kind_name(EventKind) -> String
+
+pub fn event_log_clear(EventLog) -> EventLog
+
+pub fn event_log_filter(EventLog, EventKind) -> EventLog
+
+pub fn[T] execute_with(PolicyChain, ExecutionContext, (Int, Int) -> ActionOutcome[T]) -> ExecutionResult[T]
+
+pub fn execution_context(Int, String) -> ExecutionContext
+
+pub fn[T] execution_duration_ms(ExecutionResult[T]) -> Int
+
+pub fn[T] execution_succeeded(ExecutionResult[T]) -> Bool
+
+pub fn execution_trace_text(ExecutionTrace) -> String
+
+pub fn exponential_backoff(Int, Int) -> BackoffStrategy
+
+pub fn export_latency_prometheus(LatencySnapshot, prefix? : String, labels? : Array[MetricLabel]) -> Result[String, String]
+
+pub fn export_prometheus(MetricsSnapshot, prefix? : String, labels? : Array[MetricLabel]) -> Result[String, String]
+
+pub fn fixed_backoff(Int) -> BackoffStrategy
+
+pub fn fixed_window_acquire(FixedWindowLimiter, Int, Int) -> FixedWindowResult
+
+pub fn fixed_window_config(Int, Int) -> FixedWindowConfig
+
+pub fn fixed_window_reset(FixedWindowLimiter, Int) -> FixedWindowLimiter
+
+pub fn format_batch_summary(BatchSummary) -> String
+
+pub fn format_breaker_snapshot(BreakerSnapshot) -> String
+
+pub fn format_bulkhead_snapshot(BulkheadSnapshot) -> String
+
+pub fn format_config(ResilienceConfig) -> String
+
+pub fn format_config_error(ConfigError) -> String
+
+pub fn format_event(ResilienceEvent) -> String
+
+pub fn format_execute_error(ExecuteError) -> String
+
+pub fn format_invariant_violations(Array[InvariantViolation]) -> String
+
+pub fn format_latency_snapshot(LatencySnapshot) -> String
+
+pub fn format_metrics_snapshot(MetricsSnapshot) -> String
+
+pub fn format_policy_snapshot(PolicySnapshot) -> String
+
+pub fn format_rate_limit_decision(RateLimitDecision) -> String
+
+pub fn format_registry_error(RegistryError) -> String
+
+pub fn format_simulation(SimulationResult) -> String
+
+pub fn format_timeline(Array[TimelineEntry]) -> String
+
+pub fn health_level_name(HealthLevel) -> String
+
+pub fn inspect_policy_chain(PolicyChain, Int) -> PolicySnapshot
+
+pub fn latency_merge(LatencyHistogram, LatencyHistogram) -> Result[LatencyHistogram, String]
+
+pub fn latency_observe(LatencyHistogram, Int) -> LatencyHistogram
+
+pub fn latency_percentile(LatencyHistogram, Int) -> Int
+
+pub fn latency_snapshot(LatencyHistogram) -> LatencySnapshot
+
+pub fn linear_backoff(Int, Int, Int) -> BackoffStrategy
+
+pub fn metric_label(String, String) -> MetricLabel
+
+pub fn metrics_counter(Metrics, String) -> Int
+
+pub fn metrics_from_log(EventLog) -> Metrics
+
+pub fn metrics_increment(Metrics, String, Int) -> Metrics
+
+pub fn metrics_observe_latency(Metrics, Int) -> Metrics
+
+pub fn metrics_record_event(Metrics, ResilienceEvent) -> Metrics
+
+pub fn metrics_snapshot(Metrics) -> MetricsSnapshot
+
+pub fn new_bulkhead(BulkheadConfig) -> Bulkhead
+
+pub fn new_circuit_breaker(CircuitBreakerConfig) -> CircuitBreaker
+
+pub fn new_event_log(Int) -> EventLog
+
+pub fn new_fixed_window_limiter(FixedWindowConfig, Int) -> FixedWindowLimiter
+
+pub fn new_latency_histogram(Array[Int]) -> LatencyHistogram
+
+pub fn new_metrics() -> Metrics
+
+pub fn new_policy_registry() -> PolicyRegistry
+
+pub fn new_token_bucket(TokenBucketConfig, Int) -> TokenBucket
+
+pub fn parse_config(String) -> Result[ResilienceConfig, ConfigError]
+
+pub fn permanent_failure(String, String) -> AttemptFailure
+
+pub fn policy_chain(RetryPolicy, CircuitBreaker, RateLimitPolicy, Bulkhead) -> PolicyChain
+
+pub fn record_event(EventLog, ResilienceEvent) -> EventLog
+
+pub fn refill_token_bucket(TokenBucket, Int) -> TokenBucket
+
+pub fn registry_add(PolicyRegistry, String, PolicyChain, description? : String) -> Result[PolicyRegistry, RegistryError]
+
+pub fn registry_contains(PolicyRegistry, String) -> Bool
+
+pub fn registry_default(PolicyRegistry) -> Result[PolicyChain, RegistryError]
+
+pub fn registry_find(PolicyRegistry, String) -> Result[PolicyChain, RegistryError]
+
+pub fn registry_names(PolicyRegistry) -> Array[String]
+
+pub fn registry_remove(PolicyRegistry, String) -> Result[PolicyRegistry, RegistryError]
+
+pub fn registry_replace(PolicyRegistry, String, PolicyChain, description? : String) -> Result[PolicyRegistry, RegistryError]
+
+pub fn registry_set_default(PolicyRegistry, String) -> Result[PolicyRegistry, RegistryError]
+
+pub fn resilience_event(EventKind, Int, String, String, Int) -> ResilienceEvent
+
+pub fn retry_delay(BackoffStrategy, Int) -> Int
+
+pub fn retry_policy(Int, Int, BackoffStrategy, Array[String]) -> RetryPolicy
+
+pub fn retry_snapshot(RetryPolicy, AttemptFailure, Int, Int) -> RetrySnapshot
+
+pub fn retryable_failure(String, String) -> AttemptFailure
+
+pub fn roll_fixed_window(FixedWindowLimiter, Int) -> FixedWindowLimiter
+
+pub fn run_batch(PolicyChain, Array[BatchRequest], stop_on_failure? : Bool) -> BatchResult
+
+pub fn run_scenarios(PolicyChain, Array[SimulationScenario]) -> Array[SimulationResult]
+
+pub fn sequence_backoff(Array[Int]) -> BackoffStrategy
+
+pub fn should_retry(RetryPolicy, AttemptFailure, Int, Int) -> Bool
+
+pub fn simulate(PolicyChain, SimulationScenario) -> SimulationResult
+
+pub fn simulated_failure(String, String, Bool, Int) -> SimulatedResponse
+
+pub fn simulated_success(String, Int) -> SimulatedResponse
+
+pub fn simulation_duration_ms(SimulationResult) -> Int
+
+pub fn simulation_scenario(String, String, Int, Array[SimulatedResponse], repeat_last? : Bool) -> SimulationScenario
+
+pub fn simulation_succeeded(SimulationResult) -> Bool
+
+pub fn simulation_summary(Array[SimulationResult]) -> String
+
+pub fn timeline_filter(Array[TimelineEntry], String) -> Array[TimelineEntry]
+
+pub fn token_bucket_acquire(TokenBucket, Int, Int) -> TokenBucketResult
+
+pub fn token_bucket_config(Int, Int, Int) -> TokenBucketConfig
+
+pub fn token_bucket_reset(TokenBucket, Int) -> TokenBucket
+
+pub fn token_bucket_with_tokens(TokenBucketConfig, Int, Int) -> TokenBucket
+
+pub fn total_retry_delay(RetryPolicy) -> Int
+
+pub fn trace_to_event_log(ExecutionTrace, String, Int) -> EventLog
+
+pub fn validate_config(ResilienceConfig) -> Result[ResilienceConfig, ConfigError]
+
+pub fn virtual_clock(Int) -> VirtualClock
+
+// Errors
+
+// Types and methods
+pub(all) enum ActionOutcome[T] {
+  Success(T)
+  Failure(AttemptFailure)
+}
+
+pub(all) struct AttemptFailure {
+  code : String
+  message : String
+  retryable : Bool
+} derive(Eq)
+
+pub(all) enum BackoffStrategy {
+  Fixed(Int)
+  Exponential(Int, Int)
+  Linear(Int, Int, Int)
+  Sequence(Array[Int])
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BatchItemResult {
+  id : String
+  result : SimulationResult
+} derive(@debug.Debug)
+
+pub(all) struct BatchRequest {
+  id : String
+  scenario : SimulationScenario
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BatchResult {
+  items : Array[BatchItemResult]
+  final_chain : PolicyChain
+  stopped_early : Bool
+} derive(@debug.Debug)
+
+pub(all) struct BatchSummary {
+  total : Int
+  succeeded : Int
+  failed : Int
+  attempts : Int
+  virtual_duration_ms : Int
+  stopped_early : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum BreakerDecision {
+  BreakerAllowed(CircuitBreaker, Bool)
+  BreakerRejected(CircuitBreaker, Int, String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BreakerSnapshot {
+  state : BreakerState
+  consecutive_failures : Int
+  half_open_successes : Int
+  half_open_in_flight : Int
+  open_until_ms : Int
+  remaining_open_ms : Int
+  transition_count : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum BreakerState {
+  Closed
+  Open
+  HalfOpen
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Bulkhead {
+  config : BulkheadConfig
+  active_calls : Array[String]
+  waiting_calls : Array[WaitingCall]
+  total_entered : Int
+  total_queued : Int
+  total_rejected : Int
+  total_completed : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum BulkheadAdmission {
+  BulkheadEntered(Bulkhead, Int)
+  BulkheadQueued(Bulkhead, Int)
+  BulkheadRejected(Bulkhead, String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BulkheadConfig {
+  max_concurrent : Int
+  max_waiting : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BulkheadRelease {
+  bulkhead : Bulkhead
+  released : Bool
+  promoted_call : String?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BulkheadSnapshot {
+  active : Int
+  waiting : Int
+  available : Int
+  waiting_available : Int
+  total_entered : Int
+  total_queued : Int
+  total_rejected : Int
+  total_completed : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CircuitBreaker {
+  config : CircuitBreakerConfig
+  state : BreakerState
+  consecutive_failures : Int
+  half_open_successes : Int
+  half_open_in_flight : Int
+  opened_at_ms : Int
+  open_until_ms : Int
+  transition_count : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CircuitBreakerConfig {
+  failure_threshold : Int
+  success_threshold : Int
+  open_window_ms : Int
+  half_open_max_calls : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ConfigError {
+  InvalidConfigLine(Int, String)
+  UnknownConfigKey(Int, String)
+  InvalidConfigValue(Int, String, String)
+  ConfigConstraint(String, String)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum EventKind {
+  ExecutionStarted
+  ExecutionSucceeded
+  ExecutionFailed
+  RetryScheduledEvent
+  CircuitOpenedEvent
+  CircuitHalfOpenedEvent
+  CircuitClosedEvent
+  RateLimitGrantedEvent
+  RateLimitRejectedEvent
+  BulkheadEnteredEvent
+  BulkheadQueuedEvent
+  BulkheadRejectedEvent
+  BulkheadReleasedEvent
+} derive(Eq, @debug.Debug)
+
+pub(all) struct EventLog {
+  events : Array[ResilienceEvent]
+  max_events : Int
+  dropped_events : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ExecuteError {
+  RejectedByRateLimiter(String)
+  RejectedByCircuitBreaker(Int)
+  RejectedByBulkhead(String)
+  RetryExhausted(String, String, Int)
+  InvalidPolicy(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ExecutionContext {
+  now_ms : Int
+  operation : String
+  tags : Array[Tag]
+} derive(Eq)
+
+pub(all) struct ExecutionResult[T] {
+  outcome : Result[T, ExecuteError]
+  chain : PolicyChain
+  attempts : Int
+  started_at_ms : Int
+  finished_at_ms : Int
+  trace : ExecutionTrace
+}
+
+pub(all) struct ExecutionTrace {
+  steps : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FixedWindowConfig {
+  limit : Int
+  window_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FixedWindowLimiter {
+  config : FixedWindowConfig
+  window_started_ms : Int
+  used : Int
+  total_granted : Int
+  total_rejected : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FixedWindowResult {
+  limiter : FixedWindowLimiter
+  decision : RateLimitDecision
+} derive(Eq, @debug.Debug)
+
+pub(all) enum HealthLevel {
+  Healthy
+  Degraded
+  Unavailable
+} derive(Eq, @debug.Debug)
+
+pub(all) struct InvariantViolation {
+  component : String
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LatencyBucket {
+  upper_bound_ms : Int
+  count : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LatencyHistogram {
+  buckets : Array[LatencyBucket]
+  overflow_count : Int
+  total_count : Int
+  total_ms : Int
+  min_ms : Int
+  max_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LatencySnapshot {
+  count : Int
+  average_ms : Int
+  min_ms : Int
+  max_ms : Int
+  p50_ms : Int
+  p90_ms : Int
+  p99_ms : Int
+  buckets : Array[LatencyBucket]
+  overflow_count : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetricCounter {
+  name : String
+  value : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetricLabel {
+  name : String
+  value : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Metrics {
+  counters : Array[MetricCounter]
+  latency_count : Int
+  latency_total_ms : Int
+  latency_max_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetricsSnapshot {
+  executions : Int
+  successes : Int
+  failures : Int
+  retries : Int
+  circuit_opens : Int
+  rate_limit_rejections : Int
+  bulkhead_rejections : Int
+  average_latency_ms : Int
+  max_latency_ms : Int
+  custom : Array[MetricCounter]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct NamedPolicy {
+  name : String
+  chain : PolicyChain
+  description : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PolicyChain {
+  retry : RetryPolicy
+  breaker : CircuitBreaker
+  rate_limit : RateLimitPolicy
+  bulkhead : Bulkhead
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PolicyRegistry {
+  policies : Array[NamedPolicy]
+  default_name : String?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PolicySnapshot {
+  at_ms : Int
+  health : HealthLevel
+  breaker : BreakerSnapshot
+  limiter_kind : String
+  limiter_remaining : Int
+  limiter_retry_after_ms : Int
+  bulkhead : BulkheadSnapshot
+  violations : Array[InvariantViolation]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RateLimitDecision {
+  allowed : Bool
+  remaining : Int
+  retry_after_ms : Int
+  reason : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum RateLimitPolicy {
+  TokenBucketPolicy(TokenBucket)
+  FixedWindowPolicy(FixedWindowLimiter)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum RegistryError {
+  EmptyPolicyName
+  DuplicatePolicyName(String)
+  PolicyNotFound(String)
+  DefaultPolicyNotFound(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ResilienceConfig {
+  retry_max_attempts : Int
+  retry_max_elapsed_ms : Int
+  retry_backoff : String
+  retry_base_delay_ms : Int
+  retry_max_delay_ms : Int
+  breaker_failure_threshold : Int
+  breaker_success_threshold : Int
+  breaker_open_window_ms : Int
+  breaker_half_open_max_calls : Int
+  limiter_kind : String
+  limiter_capacity : Int
+  limiter_refill_tokens : Int
+  limiter_window_ms : Int
+  bulkhead_max_concurrent : Int
+  bulkhead_max_waiting : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ResilienceEvent {
+  kind : EventKind
+  at_ms : Int
+  operation : String
+  detail : String
+  value : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RetryPolicy {
+  max_attempts : Int
+  max_elapsed_ms : Int
+  backoff : BackoffStrategy
+  retryable_codes : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RetrySnapshot {
+  attempt : Int
+  elapsed_ms : Int
+  next_delay_ms : Int
+  can_retry : Bool
+  stop_reason : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum SimulatedResponse {
+  SimulatedSuccess(String, Int)
+  SimulatedFailure(String, String, Bool, Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SimulationResult {
+  scenario : SimulationScenario
+  outcome : Result[String, ExecuteError]
+  chain : PolicyChain
+  attempts : Int
+  finished_at_ms : Int
+  timeline : Array[TimelineEntry]
+  events : EventLog
+  metrics : MetricsSnapshot
+} derive(@debug.Debug)
+
+pub(all) struct SimulationScenario {
+  name : String
+  operation : String
+  started_at_ms : Int
+  responses : Array[SimulatedResponse]
+  repeat_last : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Tag {
+  key : String
+  value : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TimelineEntry {
+  at_ms : Int
+  label : String
+  detail : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TokenBucket {
+  config : TokenBucketConfig
+  available_tokens : Int
+  last_refill_ms : Int
+  total_granted : Int
+  total_rejected : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TokenBucketConfig {
+  capacity : Int
+  refill_tokens : Int
+  refill_period_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TokenBucketResult {
+  bucket : TokenBucket
+  decision : RateLimitDecision
+} derive(Eq, @debug.Debug)
+
+pub(all) struct VirtualClock {
+  now_ms : Int
+  advances : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct WaitingCall {
+  call_id : String
+  enqueued_at_ms : Int
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
