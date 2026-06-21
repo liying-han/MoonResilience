@@ -1,0 +1,6 @@
+_build/
+.mooncakes/
+*.tmp
+*.user
+scripts/__pycache__/
+
