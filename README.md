@@ -71,7 +71,7 @@ let result = @moonresilience.execute_with(
 )
 ```
 
-配置方式参见 [`examples/resilience.conf`](examples/resilience.conf)，完整接口说明参见 [`docs/API.md`](docs/API.md)。
+配置方式参见 [`examples/resilience.conf`](examples/resilience.conf)，完整接口说明参见 [`docs/API.md`](docs/API.md)。接入网络客户端前请阅读 [`docs/HTTP_ADAPTER.md`](docs/HTTP_ADAPTER.md) 中的错误分类和状态保存说明。
 
 ## 执行顺序
 
