@@ -2,7 +2,7 @@
 pub(all) struct Tag {
   key : String
   value : String
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub(all) struct ExecutionContext {
@@ -31,7 +31,7 @@ pub(all) enum ExecuteError {
   RejectedByBulkhead(String)
   RetryExhausted(String, String, Int)
   InvalidPolicy(String)
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub fn execution_context(now_ms : Int, operation : String) -> ExecutionContext {
