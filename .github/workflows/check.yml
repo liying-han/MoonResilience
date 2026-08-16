@@ -49,6 +49,9 @@ jobs:
       - name: Test all targets
         run: moon test --target all
 
+      - name: Build all targets
+        run: moon build --target all
+
       - name: Verify formatting and generated interfaces
         shell: bash
         run: |
