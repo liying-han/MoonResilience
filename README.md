@@ -13,7 +13,7 @@ MoonResilience 是一个使用 MoonBit 编写的弹性治理基础库，用于�
 - **Config**：`key=value` 配置解析、默认值、字段校验和错误行定位。
 - **Simulation**：显式时间和预设故障响应，不进行真实等待即可验证策略行为。
 
-当前版本包含约 4.5k 行有效 MoonBit 代码和 100 项测试。核心包没有第三方依赖。
+当前版本包含约 4.8k 行有效 MoonBit 代码和 110 项测试。核心包没有第三方依赖。
 
 ## 仓库
 
@@ -134,6 +134,7 @@ moon info
 moon fmt
 moon check --warn-list +73
 moon test
+moon build --target all
 moon run cmd/main
 moon coverage analyze
 ```

@@ -50,7 +50,7 @@ SECTIONS = [
     ),
     (
         "04  当前成果与验证方式",
-        "仓库已完成核心库、CLI 示例、配置样例、API 与架构文档，现有约 5.0k 行有效 MoonBit 代码和 100 项测试。测试覆盖退避边界、熔断状态转换、两类限流器、Bulkhead 容量耗尽、策略顺序、配置错误、时间模拟、指标导出及批量场景。评审者可直接运行 moon check、moon test 和 moon run cmd/main；README 同时列出同步执行、显式时钟等当前边界。",
+        "仓库已完成核心库、CLI 示例、配置样例、API 与架构文档，现有约 5.0k 行有效 MoonBit 代码和 110 项测试。测试覆盖退避边界、熔断状态转换、两类限流器、Bulkhead 容量耗尽、策略顺序、配置错误、时间模拟、指标导出及批量场景。评审者可直接运行 moon check、moon test、moon build 和 moon run cmd/main；README 同时列出同步执行、显式时钟等当前边界。",
     ),
     (
         "05  公开开发与后续计划",
@@ -182,7 +182,7 @@ def build_pdf():
         ("4 类", "基础策略"),
         ("2 种", "限流算法"),
         ("约 5.0k 行", "有效 MoonBit 代码"),
-        ("100 项", "自动化测试"),
+        ("110 项", "自动化测试"),
     ]
     metric_table = Table(
         [[
@@ -333,7 +333,7 @@ def build_docx():
         ("4 类", "基础策略"),
         ("2 种", "限流算法"),
         ("约 5.0k 行", "有效 MoonBit 代码"),
-        ("100 项", "自动化测试"),
+        ("110 项", "自动化测试"),
     ]
     for cell, (value, label) in zip(metrics.rows[0].cells, metric_cells):
         set_cell_shading(cell, "F5F0E7")
