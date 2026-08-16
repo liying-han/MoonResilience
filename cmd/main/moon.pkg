@@ -1,5 +1,5 @@
 import {
-  "q2weasd/moonresilience",
+  "liying-han/moonresilience",
 }
 
 pkgtype(kind: "executable")

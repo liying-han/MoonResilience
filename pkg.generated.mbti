@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "q2weasd/moonresilience"
+package "liying-han/moonresilience"
 
 import {
   "moonbitlang/core/debug",

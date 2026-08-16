@@ -1,4 +1,4 @@
-name = "q2weasd/moonresilience"
+name = "liying-han/moonresilience"
 
 version = "0.2.0"
 
